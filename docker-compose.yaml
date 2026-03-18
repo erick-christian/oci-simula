@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: oci_db
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://admin:password123@db:5432/oci_db
+    volumes:
+      - ./backend:/app
+      - ./frontend/public/referencias:/frontend/public/referencias
+
+  # --- AGREGAR ESTO ---
+  frontend:
+    build: ./frontend
+    ports:
+      - "8077:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Truco para no borrar las dependencias instaladas
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Vital para VirtualBox
+  # --------------------
+
+volumes:
+  pgdata:

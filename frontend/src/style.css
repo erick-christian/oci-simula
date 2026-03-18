@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- REGLAS DE RESCATE MATEMÁTICO --- */
+
+/* 1. Ocultar los números feos de accesibilidad */
+.katex-mathml {
+    display: none !important;
+}
+
+/* 2. ¡IMPORTANTE! Recuperar la línea de la fracción */
+/* Tailwind pone los bordes en 0, aquí los devolvemos */
+.katex-frac-line {
+    border-bottom-width: 0.05em !important;
+    border-color: currentColor !important;
+}
+
+/* 3. Asegurar que la raíz cuadrada también tenga línea */
+.katex-sqrt-line {
+    border-top-width: 0.05em !important;
+}
+
+/* --- UTILIDADES DE DISEÑO --- */
+
+.custom-scrollbar::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Transiciones suaves para el cambio de ancho */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === DARK MODE: Opciones de respuesta (TarjetaReactivo) === */
+
+/* Fondo de cada fila de opcion: ligeramente mas claro que la tarjeta (slate-800) */
+.dark .option-row {
+    background-color: rgb(51 65 85 / 0.55); /* ~slate-700 semi-transparente */
+}
+
+/* Circulo de la letra: color de enfasis indigo en modo oscuro */
+.dark .option-circle {
+    background-color: #4f46e5 !important; /* indigo-600 */
+    border-color: #818cf8 !important;     /* indigo-400 */
+    color: #ffffff !important;
+}
