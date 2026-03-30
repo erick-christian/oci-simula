@@ -678,6 +678,12 @@ const guardarConfigAdmin = async () => {
       <div v-if="pantalla === 'inicio'"
         class="text-center w-full max-w-lg bg-white dark:bg-slate-800 p-6 md:p-8 rounded-[2rem] shadow-2xl border-b-[6px] border-indigo-500 animate-fade-in relative transition-colors duration-300">
         
+        <!-- Botón Administrar Superior Izquierdo -->
+        <button @click="abrirAdmin" class="absolute top-4 left-4 px-3 h-10 rounded-full text-slate-400 hover:text-indigo-600 hover:bg-slate-100 dark:hover:text-indigo-400 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock text-sm"></i>
+          <span class="text-xs font-bold hidden sm:inline">Administrar</span>
+        </button>
+
         <!-- Toggle Dark Mode Superior -->
         <button @click="toggleTema" class="absolute top-4 right-4 w-10 h-10 rounded-full text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition flex items-center justify-center">
           <i class="fa-solid text-xl" :class="temaDark ? 'fa-sun text-amber-400' : 'fa-moon'"></i>

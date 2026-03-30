@@ -20,19 +20,23 @@ Aplicación web interactiva diseñada para practicar exámenes de simulación pa
     *   **Saltar / Guardar para después**: Permite mover preguntas a una lista de pendientes para resolverlas al final.
     *   **Reportar Error**: Envía una alerta directa al supervisor si se detecta un fallo en el planteamiento.
 *   **Visor de PDF Integrado**: Carga automática del libro/página de referencia de la SEP para consulta directa sin salir de la pregunta.
+*   **Renderizado Matemático**: Soporte nativo para lectura de fórmulas complejas y ecuaciones con LaTeX (`KaTeX`).
 *   **Resultados y Analíticas**:
     *   Pantallazo de calificación con medallas dinámicas (Oro, Plata, Bronce).
     *   Desglose porcentual por áreas temáticas.
     *   **Gráfica de Radar (Radar Chart)**: Histórico de rendimiento por cada área del conocimiento.
+*   **Modo Oscuro (Dark Mode)**: Interfaz adaptativa que protege la vista durante prácticas nocturnas, accesible desde la pantalla de inicio.
 
 ### 🔐 Panel Administrativo
+*   **Acceso Rápido**: Botón `Administrar` (🔒) estratégicamente ubicado en la esquina superior izquierda de la pantalla de registro.
 *   **Acceso Protegido**: Formulario de Login para auditores y supervisores.
 *   **Gestión de Configuración**:
     *   Ajuste de tiempos (minutos) y cantidad de preguntas por cada modalidad.
     *   Configuración del correo de supervisor que recibe los reportes y calificaciones.
     *   Filtros globales de generación (Generar solo preguntas con referencias validadas).
-*   **Gestión de Reportes**: Listado de preguntas marcadas por alumnos. Los administradores pueden editar texto, adjuntar imágenes y marcar como "Revisado".
-*   **Métricas Globales**: Tabla de puntuaciones históricas ordenadas por fecha y alumno.
+*   **Gestión de Reportes**: Listado de preguntas marcadas por alumnos. Los administradores pueden editar texto, adjuntar archivos/imágenes y marcar como "Revisado".
+*   **Sistema de Notificaciones Automáticas**: El backend envía correos electrónicos HTML estructurados al supervisor cada que un alumno finaliza un simulador o cuando se reporta un reactivo dañado.
+*   **Métricas Globales**: Tabla de puntuaciones históricas ordenadas por fecha y analíticas por alumno.
 
 ---
 
@@ -75,6 +79,8 @@ docker compose -f docker-compose.prod.yaml up -d --build
 
 ## 📥 Importación de Datos
 
+Las preguntas del simulador están preparadas para cargarse a partir del archivo `preguntas.json`. **En este caso, se utilizó Inteligencia Artificial para destilar PDFs de cuestionarios reales y extraer/construir esta información.**
+
 Una vez que los contenedores estén corriendo, usa el script helper para poblar la base de datos:
 ```bash
 docker compose exec backend python importar.py
@@ -90,3 +96,10 @@ docker compose exec backend python importar.py
 *   **`/frontend/public/referencias`**: Almacén principal de PDFs de soporte para preguntas.
 *   **`/deployment`**: Scripts de empaquetado y subida vía SSH/SFTP (`do_deploy.py`).
 
+---
+
+## ☁️ CUBEPATH (Infraestructura de Producción)
+
+La aplicación se encuentra lista y liberada para funcionar en un **VPS tipo gp.micro**.
+*   **Recursos**: 2 vCPU, 4 GB RAM, 80 GB SSD y 5 TB de transferencia.
+*   **Demo Online**: [http://midudev.terian.com.mx](http://midudev.terian.com.mx)

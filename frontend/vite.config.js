@@ -57,6 +57,6 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         },
-        allowedHosts: ['oci.terian.com.mx']
+        allowedHosts: ['oci.terian.com.mx', 'midudev.terian.com.mx']
     }
 })
